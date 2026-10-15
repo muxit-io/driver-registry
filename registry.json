@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-06-01T09:52:45.708Z",
+  "updated": "2026-10-15T13:00:26.347Z",
   "drivers": [
     {
       "id": "muxit/audiosynth",
@@ -46,31 +46,6 @@
       "minMuxitVersion": "0.3.0",
       "published": "2026-05-08T13:38:38.859Z",
       "changelog": "# Changelog\n\n## 0.1.2\n\n### Features\n\n- On-demand `Details` documentation layer surfaced to the AI prompt and\n  editor hover.\n\n## 0.1.1\n\nManifest polish — no functional changes.\n\n## 0.1.0\n\nInitial release. Live MIDI input/output over any USB or virtual MIDI\ndevice, per-channel filtering and pass-through, internal 24-PPQN clock\nwith transport control, Standard MIDI File (SMF) playback and recording,\npanic / all-notes-off, and a learn helper for mapping physical controls.\nIncoming events stream as JSON for scripts and dashboards."
-    },
-    {
-      "id": "muxit/serial-probe",
-      "name": "SerialProbe",
-      "version": "0.2.0",
-      "description": "AI-assisted serial protocol reverse-engineering: captures traffic in labelled windows, detects framing and checksums locally, correlates stimulus/response, and exports a working connector config.",
-      "author": {
-        "name": "Muxit",
-        "github": "muxit-io"
-      },
-      "group": "communication",
-      "tier": 1,
-      "tags": [
-        "serial",
-        "monitor",
-        "terminal",
-        "other"
-      ],
-      "license": "MIT",
-      "repository": "https://github.com/muxit-io/muxit-drivers",
-      "downloadUrl": "https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-serial-probe/v0.2.0/muxit-serial-probe-v0.2.0.muxdriver",
-      "downloadSize": 13083,
-      "sha256": "266fc06a4512bd5904157baa8fdaf8b16d81a53c6c628ecb1e071afa8365323f",
-      "minMuxitVersion": "0.3.0",
-      "published": "2026-04-18T17:45:02.846Z"
     }
   ]
 }
