@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunatone DALI-2 USB (LUBA) — Muxit Driver Registry</title>
+  <meta name="description" content="DALI-2 bus master via a Lunatone DALI-2 USB interface (LUBA protocol): levels, status, settings read/write, D4i memory banks, addressing.">
+  <meta property="og:title" content="Lunatone DALI-2 USB (LUBA) — Muxit Driver Registry">
+  <meta property="og:description" content="DALI-2 bus master via a Lunatone DALI-2 USB interface (LUBA protocol): levels, status, settings read/write, D4i memory banks, addressing.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="../../">Driver Registry</a> / Lunatone DALI-2 USB (LUBA)
+    </nav>
+
+    <header class="detail-header">
+      <div class="detail-header-info">
+        <h1 class="detail-title">Lunatone DALI-2 USB (LUBA)</h1>
+        <div class="detail-meta">
+          <span class="dm-tag dm-tag-version">v0.3.1</span>
+          <span class="dm-tag dm-tag-tier">JS</span>
+          <span class="dm-tag dm-tag-group">communication</span>
+          <a class="dm-tag" href="https://github.com/muxit-io">by Muxit</a>
+          <span class="dm-tag">MIT</span>
+        </div>
+        <p class="detail-description">DALI-2 bus master via a Lunatone DALI-2 USB interface (LUBA protocol): levels, status, settings read/write, D4i memory banks, addressing.</p>
+      </div>
+    </header>
+
+    <div class="detail-actions">
+      <a class="dm-btn dm-btn-download" href="https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-lunatone-luba/v0.3.1/muxit-lunatone-luba-v0.3.1.muxdriver">Download .muxdriver</a>
+      <a class="dm-btn dm-btn-secondary" href="https://github.com/muxit-io/muxit-development">View repository</a>
+    </div>
+
+    <section class="detail-section">
+      <h2>Details</h2>
+      <dl class="metadata-grid">
+        <dt>Driver ID</dt>
+        <dd><code>muxit/lunatone-luba</code></dd>
+        <dt>Version</dt>
+        <dd>0.3.1</dd>
+        <dt>Group</dt><dd>communication</dd>
+        <dt>Tier</dt><dd>JS (JavaScript, sandboxed)</dd>
+        <dt>License</dt><dd>MIT</dd>
+        <dt>Published</dt><dd>2026-11-09</dd>
+        <dt>Minimum Muxit version</dt><dd>0.3.0</dd>
+        <dt>Download size</dt><dd>19.7 KB</dd>
+        <dt>SHA-256</dt><dd><code>6c1dd4736c42279fc26e52f41d943715c0d75d6dbcc84f4974443bfcbd4caa00</code></dd>
+        <dt>Repository</dt><dd><a href="https://github.com/muxit-io/muxit-development">https://github.com/muxit-io/muxit-development</a></dd>
+      </dl>
+    </section>
+
+    <section class="detail-section">
+      <h2>Tags</h2>
+      <div class="tag-list">
+        <span class="dm-tag">#io</span> <span class="dm-tag">#serial</span>
+      </div>
+    </section>
+    
+    <section class="detail-section">
+      <h2>Changelog</h2>
+      <div class="markdown-block">## 0.3.1
+
+- First version in the Muxit driver repo, with a `template.js` connector (`dali`) that the bundled &quot;DALI status&quot; dashboard and `dali-monitor` script bind to.
+- The serial port is no longer opened with an empty line delimiter, and `release` leaves raw mode only after closing the port. Muxit&#39;s line splitter loops forever on an empty delimiter, so data arriving outside raw mode could hang the serial receive thread.
+- When the interface does not answer the LUBA settings command at `open`, the port is closed again instead of staying open with `connected: true`.</div>
+    </section>
+
+    <footer class="page-footer">
+      Source entry: <a href="https://github.com/muxit-io/driver-registry/blob/main/drivers/muxit-lunatone-luba.json"><code>drivers/muxit-lunatone-luba.json</code></a>
+    </footer>
+  </main>
+</body>
+</html>

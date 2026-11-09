@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-09T15:52:13.207Z",
+  "updated": "2026-11-09T15:58:17.682Z",
   "drivers": [
     {
       "id": "muxit/audiosynth",
@@ -24,6 +24,30 @@
       "minMuxitVersion": "0.3.0",
       "published": "2026-11-09T15:49:25.138Z",
       "changelog": "## 1.5.0\n\n### Features\n\n- **Polyphony.** `playTone`, `playNote`, `playMelody`, and `beep` now accept\n  `overlap: true`. The note is mixed on top of whatever voices are already\n  ringing and the action returns at the gate-off so the next call can start\n  before the tail finishes. The previous replace-not-queue behaviour is the\n  default (`overlap: false`) — existing scripts and connectors continue to\n  work unchanged.\n- **Release tails ring out past gate-off.** Long-decay presets like `bell`\n  and `marimba` are no longer compressed into the requested duration —\n  a 200 ms bell now decays for its full ~1.5 s natural tail instead of\n  being suddenly cut off. The action call still blocks until the tail\n  finishes when `overlap` is `false`; `playing` reflects the full\n  tail-out window.\n- **Polyphonic NAudio output** runs through a single persistent\n  `WaveOutEvent` driven by a sample-mixer, so overlapping voices on\n  Windows host playback don't spawn an output device per note.\n- **Polyphonic streaming output** uses the host's new live encoder\n  session — one long-lived Opus encoder spans every overlapping voice\n  and a 1 s post-silence linger window, so back-to-back overlap calls\n  don't restart the encoder and glitch the browser-side decoder.\n\n### Notes\n\n- Requires the matching MuxitServer host change (adds\n  `AudioStreamReaderEmitter` on `IConnectorDriver`). Older hosts will\n  fall back to monophonic streaming when `overlap: true` is requested\n  in browser mode — NAudio polyphony still works."
+    },
+    {
+      "id": "muxit/lunatone-luba",
+      "name": "Lunatone DALI-2 USB (LUBA)",
+      "version": "0.3.1",
+      "description": "DALI-2 bus master via a Lunatone DALI-2 USB interface (LUBA protocol): levels, status, settings read/write, D4i memory banks, addressing.",
+      "author": {
+        "name": "Muxit",
+        "github": "muxit-io"
+      },
+      "group": "communication",
+      "tier": 1,
+      "tags": [
+        "io",
+        "serial"
+      ],
+      "license": "MIT",
+      "repository": "https://github.com/muxit-io/muxit-development",
+      "downloadUrl": "https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-lunatone-luba/v0.3.1/muxit-lunatone-luba-v0.3.1.muxdriver",
+      "downloadSize": 20185,
+      "sha256": "6c1dd4736c42279fc26e52f41d943715c0d75d6dbcc84f4974443bfcbd4caa00",
+      "minMuxitVersion": "0.3.0",
+      "published": "2026-11-09T15:57:35.031Z",
+      "changelog": "## 0.3.1\n\n- First version in the Muxit driver repo, with a `template.js` connector (`dali`) that the bundled \"DALI status\" dashboard and `dali-monitor` script bind to.\n- The serial port is no longer opened with an empty line delimiter, and `release` leaves raw mode only after closing the port. Muxit's line splitter loops forever on an empty delimiter, so data arriving outside raw mode could hang the serial receive thread.\n- When the interface does not answer the LUBA settings command at `open`, the port is closed again instead of staying open with `connected: true`."
     },
     {
       "id": "muxit/midi",
