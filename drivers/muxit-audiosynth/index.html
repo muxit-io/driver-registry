@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AudioSynth — Muxit Driver Registry</title>
-  <meta name="description" content="Software audio synthesizer. Plays tones, musical notes, and short melodies — useful for lab-side audible notifications, robot/CNC feedback tones, and experiment-complete bell sounds. Streams Opus-encoded audio to every connected dashboard by default; can also (or instead) play locally via NAudio on Windows hosts. Four waveforms, ADSR envelopes, additive harmonics, and presets (beep / bell / pluck / pad / marimba).">
+  <meta name="description" content="Software audio synthesizer. Plays tones, musical notes, and short melodies — useful for lab-side audible notifications, robot/CNC feedback tones, and experiment-complete bell sounds. Polyphonic via overlap: true so notes can ring into each other; long-tail presets (bell, marimba) decay naturally past the gate-on duration. Streams Opus-encoded audio to every connected dashboard by default; can also (or instead) play locally via NAudio on Windows hosts. Four waveforms, ADSR envelopes, additive harmonics, and presets (beep / bell / pluck / pad / marimba).">
   <meta property="og:title" content="AudioSynth — Muxit Driver Registry">
-  <meta property="og:description" content="Software audio synthesizer. Plays tones, musical notes, and short melodies — useful for lab-side audible notifications, robot/CNC feedback tones, and experiment-complete bell sounds. Streams Opus-encoded audio to every connected dashboard by default; can also (or instead) play locally via NAudio on Windows hosts. Four waveforms, ADSR envelopes, additive harmonics, and presets (beep / bell / pluck / pad / marimba).">
+  <meta property="og:description" content="Software audio synthesizer. Plays tones, musical notes, and short melodies — useful for lab-side audible notifications, robot/CNC feedback tones, and experiment-complete bell sounds. Polyphonic via overlap: true so notes can ring into each other; long-tail presets (bell, marimba) decay naturally past the gate-on duration. Streams Opus-encoded audio to every connected dashboard by default; can also (or instead) play locally via NAudio on Windows hosts. Four waveforms, ADSR envelopes, additive harmonics, and presets (beep / bell / pluck / pad / marimba).">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -20,18 +20,18 @@
       <div class="detail-header-info">
         <h1 class="detail-title">AudioSynth</h1>
         <div class="detail-meta">
-          <span class="dm-tag dm-tag-version">v1.4.1</span>
+          <span class="dm-tag dm-tag-version">v1.5.0</span>
           <span class="dm-tag dm-tag-tier">DLL</span>
           <span class="dm-tag dm-tag-group">utilities</span>
           <a class="dm-tag" href="https://github.com/muxit-io">by muxit</a>
           
         </div>
-        <p class="detail-description">Software audio synthesizer. Plays tones, musical notes, and short melodies — useful for lab-side audible notifications, robot/CNC feedback tones, and experiment-complete bell sounds. Streams Opus-encoded audio to every connected dashboard by default; can also (or instead) play locally via NAudio on Windows hosts. Four waveforms, ADSR envelopes, additive harmonics, and presets (beep / bell / pluck / pad / marimba).</p>
+        <p class="detail-description">Software audio synthesizer. Plays tones, musical notes, and short melodies — useful for lab-side audible notifications, robot/CNC feedback tones, and experiment-complete bell sounds. Polyphonic via overlap: true so notes can ring into each other; long-tail presets (bell, marimba) decay naturally past the gate-on duration. Streams Opus-encoded audio to every connected dashboard by default; can also (or instead) play locally via NAudio on Windows hosts. Four waveforms, ADSR envelopes, additive harmonics, and presets (beep / bell / pluck / pad / marimba).</p>
       </div>
     </header>
 
     <div class="detail-actions">
-      <a class="dm-btn dm-btn-download" href="https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-audiosynth/v1.4.1/muxit-audiosynth-v1.4.1.muxdriver">Download .muxdriver</a>
+      <a class="dm-btn dm-btn-download" href="https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-audiosynth/v1.5.0/muxit-audiosynth-v1.5.0.muxdriver">Download .muxdriver</a>
       
     </div>
 
@@ -41,13 +41,13 @@
         <dt>Driver ID</dt>
         <dd><code>muxit/audiosynth</code></dd>
         <dt>Version</dt>
-        <dd>1.4.1</dd>
+        <dd>1.5.0</dd>
         <dt>Group</dt><dd>utilities</dd>
         <dt>Tier</dt><dd>DLL (C# DLL)</dd>
-        <dt>Published</dt><dd>2026-05-08</dd>
+        <dt>Published</dt><dd>2026-11-09</dd>
         <dt>Minimum Muxit version</dt><dd>0.3.0</dd>
-        <dt>Download size</dt><dd>242.1 KB</dd>
-        <dt>SHA-256</dt><dd><code>99c369a20af284f53d4d97b320f718d2936c273e06b5fa425436b725e79b1bd0</code></dd>
+        <dt>Download size</dt><dd>246.7 KB</dd>
+        <dt>SHA-256</dt><dd><code>bf3730cc85467c3d152ac49a048fabb43b7c63cf1849252cadde7ab4a8c9fe98</code></dd>
       </dl>
     </section>
 
@@ -60,22 +60,36 @@
     
     <section class="detail-section">
       <h2>Changelog</h2>
-      <div class="markdown-block">## 1.4.1
+      <div class="markdown-block">## 1.5.0
 
-### Internal
+### Features
 
-- Streaming path moved off Concentus and onto the new SDK
-  `AudioStreamEmitter` API. The driver now hands the host a pre-rendered
-  float buffer per note; the host owns Opus encoding, framing, real-time
-  pacing, and stop-frame emission. The wire format is unchanged and
-  Concentus no longer ships in the AudioSynth `.muxdriver` package —
-  it lives once in MuxitServer alongside the central
-  `AudioStreamEncoder`.
+- **Polyphony.** `playTone`, `playNote`, `playMelody`, and `beep` now accept
+  `overlap: true`. The note is mixed on top of whatever voices are already
+  ringing and the action returns at the gate-off so the next call can start
+  before the tail finishes. The previous replace-not-queue behaviour is the
+  default (`overlap: false`) — existing scripts and connectors continue to
+  work unchanged.
+- **Release tails ring out past gate-off.** Long-decay presets like `bell`
+  and `marimba` are no longer compressed into the requested duration —
+  a 200 ms bell now decays for its full ~1.5 s natural tail instead of
+  being suddenly cut off. The action call still blocks until the tail
+  finishes when `overlap` is `false`; `playing` reflects the full
+  tail-out window.
+- **Polyphonic NAudio output** runs through a single persistent
+  `WaveOutEvent` driven by a sample-mixer, so overlapping voices on
+  Windows host playback don&#39;t spawn an output device per note.
+- **Polyphonic streaming output** uses the host&#39;s new live encoder
+  session — one long-lived Opus encoder spans every overlapping voice
+  and a 1 s post-silence linger window, so back-to-back overlap calls
+  don&#39;t restart the encoder and glitch the browser-side decoder.
 
 ### Notes
 
-- No driver-author-visible behavior change. Existing connector configs
-  and scripts continue to work without modification.</div>
+- Requires the matching MuxitServer host change (adds
+  `AudioStreamReaderEmitter` on `IConnectorDriver`). Older hosts will
+  fall back to monophonic streaming when `overlap: true` is requested
+  in browser mode — NAudio polyphony still works.</div>
     </section>
 
     <footer class="page-footer">
