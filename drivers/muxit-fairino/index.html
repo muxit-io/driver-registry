@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fairino — Muxit Driver Registry</title>
+  <meta name="description" content="Fairino collaborative robot driver (FR3/FR5/FR10/FR20 and similar) — communicates via the controller&#39;s native XML-RPC protocol on port 20003, with real-time state over CNDE (port 20005, firmware 4.x) or the legacy stream on port 20004. Background state monitor caches joints, TCP pose, motion status and safety alarms so property reads return instantly. Joint (MoveJ), straight-line (MoveL) and Cartesian point-to-point (MoveCart) motion that always runs with the robot&#39;s active tool and workpiece frame, waits or queues on request, plus forward/inverse kinematics, digital/analog I/O (read and write), force sensing, and the controller&#39;s fault codes translated to text. Streams JSON state snapshots at the configured poll rate.">
+  <meta property="og:title" content="Fairino — Muxit Driver Registry">
+  <meta property="og:description" content="Fairino collaborative robot driver (FR3/FR5/FR10/FR20 and similar) — communicates via the controller&#39;s native XML-RPC protocol on port 20003, with real-time state over CNDE (port 20005, firmware 4.x) or the legacy stream on port 20004. Background state monitor caches joints, TCP pose, motion status and safety alarms so property reads return instantly. Joint (MoveJ), straight-line (MoveL) and Cartesian point-to-point (MoveCart) motion that always runs with the robot&#39;s active tool and workpiece frame, waits or queues on request, plus forward/inverse kinematics, digital/analog I/O (read and write), force sensing, and the controller&#39;s fault codes translated to text. Streams JSON state snapshots at the configured poll rate.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="../../">Driver Registry</a> / Fairino
+    </nav>
+
+    <header class="detail-header">
+      <div class="detail-header-info">
+        <h1 class="detail-title">Fairino</h1>
+        <div class="detail-meta">
+          <span class="dm-tag dm-tag-version">v1.2.0</span>
+          <span class="dm-tag dm-tag-tier">DLL</span>
+          <span class="dm-tag dm-tag-group">motion</span>
+          <a class="dm-tag" href="https://github.com/muxit-io">by muxit</a>
+          
+        </div>
+        <p class="detail-description">Fairino collaborative robot driver (FR3/FR5/FR10/FR20 and similar) — communicates via the controller&#39;s native XML-RPC protocol on port 20003, with real-time state over CNDE (port 20005, firmware 4.x) or the legacy stream on port 20004. Background state monitor caches joints, TCP pose, motion status and safety alarms so property reads return instantly. Joint (MoveJ), straight-line (MoveL) and Cartesian point-to-point (MoveCart) motion that always runs with the robot&#39;s active tool and workpiece frame, waits or queues on request, plus forward/inverse kinematics, digital/analog I/O (read and write), force sensing, and the controller&#39;s fault codes translated to text. Streams JSON state snapshots at the configured poll rate.</p>
+      </div>
+    </header>
+
+    <div class="detail-actions">
+      <a class="dm-btn dm-btn-download" href="https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-fairino/v1.2.0/muxit-fairino-v1.2.0.muxdriver">Download .muxdriver</a>
+      
+    </div>
+
+    <section class="detail-section">
+      <h2>Details</h2>
+      <dl class="metadata-grid">
+        <dt>Driver ID</dt>
+        <dd><code>muxit/fairino</code></dd>
+        <dt>Version</dt>
+        <dd>1.2.0</dd>
+        <dt>Group</dt><dd>motion</dd>
+        <dt>Tier</dt><dd>DLL (C# DLL)</dd>
+        <dt>Published</dt><dd>2026-11-11</dd>
+        <dt>Minimum Muxit version</dt><dd>0.3.0</dd>
+        <dt>Download size</dt><dd>66.7 KB</dd>
+        <dt>SHA-256</dt><dd><code>b8d543ff46c516a87f2ea06bf9cf8c205c772056d1e4b1b798e1a25c9b01a3e9</code></dd>
+      </dl>
+    </section>
+
+    <section class="detail-section">
+      <h2>Tags</h2>
+      <div class="tag-list">
+        <span class="dm-tag">#motion</span> <span class="dm-tag">#robotics</span>
+      </div>
+    </section>
+    
+    <section class="detail-section">
+      <h2>Changelog</h2>
+      <div class="markdown-block">## 1.2.0
+
+- **Real-time state over CNDE (port 20005).** Firmware 4.x — and the official SDK
+  since C#SDK-V1.3.2 — use CNDE: the driver subscribes to the fields it needs at
+  `statePeriodMs` (default 8 ms). New `config.stateStream`: `auto` (default) tries
+  CNDE first and falls back to the legacy 20004 packet, so 3.x controllers keep
+  working without changes; `cnde` / `legacy` force one. `stateProtocol` reports
+  which transport is in use.
+- **New CNDE-only properties** (null on the legacy stream): `speedScaleAuto`,
+  `speedScaleManual`, `collisionLevel`, `safetyDoorAlarm`, `safetyPlaneAlarm`,
+  `motionAlarm`, `interfereAlarm`, `singularPose`, `softLimitExceeded`,
+  `abnormalStop`, `programRunState`, `luaFileName`, `luaLineNumber`. Firmware that
+  doesn&#39;t know them gets the core field set only.
+- New config: `cndePort` (20005), `statePeriodMs`. `pollIntervalMs` was never used
+  and is dropped from the template.</div>
+    </section>
+
+    <footer class="page-footer">
+      Source entry: <a href="https://github.com/muxit-io/driver-registry/blob/main/drivers/muxit-fairino.json"><code>drivers/muxit-fairino.json</code></a>
+    </footer>
+  </main>
+</body>
+</html>
