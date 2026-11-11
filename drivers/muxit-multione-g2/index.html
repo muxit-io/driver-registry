@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signify MultiOne Workflow G2 — Muxit Driver Registry</title>
+  <meta name="description" content="Signify MultiOne Workflow G2 local REST service (localhost:2023): list interfaces and devices, write feature configurations (AOC, DALI, luminaire data) into Signify LED drivers.">
+  <meta property="og:title" content="Signify MultiOne Workflow G2 — Muxit Driver Registry">
+  <meta property="og:description" content="Signify MultiOne Workflow G2 local REST service (localhost:2023): list interfaces and devices, write feature configurations (AOC, DALI, luminaire data) into Signify LED drivers.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <main class="page">
+    <nav class="breadcrumb">
+      <a href="../../">Driver Registry</a> / Signify MultiOne Workflow G2
+    </nav>
+
+    <header class="detail-header">
+      <div class="detail-header-info">
+        <h1 class="detail-title">Signify MultiOne Workflow G2</h1>
+        <div class="detail-meta">
+          <span class="dm-tag dm-tag-version">v0.1.4</span>
+          <span class="dm-tag dm-tag-tier">JS</span>
+          <span class="dm-tag dm-tag-group">communication</span>
+          <a class="dm-tag" href="https://github.com/muxit-io">by Muxit</a>
+          <span class="dm-tag">MIT</span>
+        </div>
+        <p class="detail-description">Signify MultiOne Workflow G2 local REST service (localhost:2023): list interfaces and devices, write feature configurations (AOC, DALI, luminaire data) into Signify LED drivers.</p>
+      </div>
+    </header>
+
+    <div class="detail-actions">
+      <a class="dm-btn dm-btn-download" href="https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-multione-g2/v0.1.4/muxit-multione-g2-v0.1.4.muxdriver">Download .muxdriver</a>
+      <a class="dm-btn dm-btn-secondary" href="https://github.com/muxit-io/muxit-development">View repository</a>
+    </div>
+
+    <section class="detail-section">
+      <h2>Details</h2>
+      <dl class="metadata-grid">
+        <dt>Driver ID</dt>
+        <dd><code>muxit/multione-g2</code></dd>
+        <dt>Version</dt>
+        <dd>0.1.4</dd>
+        <dt>Group</dt><dd>communication</dd>
+        <dt>Tier</dt><dd>JS (JavaScript, sandboxed)</dd>
+        <dt>License</dt><dd>MIT</dd>
+        <dt>Published</dt><dd>2026-11-11</dd>
+        <dt>Minimum Muxit version</dt><dd>0.3.0</dd>
+        <dt>Download size</dt><dd>13.3 KB</dd>
+        <dt>SHA-256</dt><dd><code>b9afab35e6d568c862a35800dd1a01c83075af302171ce87d327b5b59d007d22</code></dd>
+        <dt>Repository</dt><dd><a href="https://github.com/muxit-io/muxit-development">https://github.com/muxit-io/muxit-development</a></dd>
+      </dl>
+    </section>
+
+    <section class="detail-section">
+      <h2>Tags</h2>
+      <div class="tag-list">
+        <span class="dm-tag">#io</span> <span class="dm-tag">#networking</span>
+      </div>
+    </section>
+    
+    <section class="detail-section">
+      <h2>Changelog</h2>
+      <div class="markdown-block">## 0.1.4
+
+- **`online` now updates by itself.** A heartbeat checks `GET /server/v1/status` every `heartbeatMs` (default 5000, 0 = off), skipped while another call runs, so a dashboard shows when Workflow G2 is stopped or started without any button press. New property `serviceMessage` says it in words. Heartbeat calls don&#39;t touch `lastResponse` or `lastError`.
+- The `multione` template hands the port over with the `dali` connector&#39;s `usbRelease` / `usbOpen` (LunatoneLuba 0.4.0 renamed `release` / `open`). **If you use the `multione` connector, update the LunatoneLuba driver to 0.4.0 too.** The &quot;MultiOne G2&quot; dashboard binds `dali.usbConnected`.</div>
+    </section>
+
+    <footer class="page-footer">
+      Source entry: <a href="https://github.com/muxit-io/driver-registry/blob/main/drivers/muxit-multione-g2.json"><code>drivers/muxit-multione-g2.json</code></a>
+    </footer>
+  </main>
+</body>
+</html>
