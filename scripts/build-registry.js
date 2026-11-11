@@ -18,7 +18,7 @@ const DRIVERS_DIR = path.join(ROOT, 'drivers');
 const SITE_DIR = path.join(ROOT, 'site');
 const OUT_DIR = path.join(ROOT, 'dist');
 const REQUIRED_FIELDS = ['id', 'name', 'version', 'downloadUrl'];
-const TIER_LABELS = { 1: 'JS', 3: 'DLL' };
+const TIER_LABELS = { 1: 'JS', 2: 'Python', 3: 'DLL' };
 
 function escapeHtml(value) {
   if (value == null) return '';
@@ -95,7 +95,7 @@ function renderDriverPage(template, entry) {
 
   const metadataRows = [];
   if (entry.group)           metadataRows.push(['Group', escapeHtml(entry.group)]);
-  if (tierLabel)             metadataRows.push(['Tier', `${escapeHtml(tierLabel)} (${entry.tier === 1 ? 'JavaScript, sandboxed' : 'C# DLL'})`]);
+  if (tierLabel)             metadataRows.push(['Tier', `${escapeHtml(tierLabel)} (${entry.tier === 1 ? 'JavaScript, sandboxed' : entry.tier === 2 ? 'Python, subprocess' : 'C# DLL'})`]);
   if (entry.license)         metadataRows.push(['License', escapeHtml(entry.license)]);
   if (entry.published)       metadataRows.push(['Published', escapeHtml(formatDate(entry.published))]);
   if (entry.minMuxitVersion) metadataRows.push(['Minimum Muxit version', escapeHtml(entry.minMuxitVersion)]);

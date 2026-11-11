@@ -36,7 +36,7 @@ A `.muxdriver` file is a plain ZIP archive with a fixed layout.
   "name": "Human Readable Name",   // Required.
   "version": "1.0.0",              // Required. Semver x.y.z.
   "entryPoint": "driver.driver.js",// Required. Bare filename — must exist in the package root.
-  "tier": 1,                       // Required. 1 = JavaScript, 3 = .NET DLL.
+  "tier": 1,                       // Required. 1 = JavaScript, 2 = Python, 3 = .NET DLL.
 
   "description": "...",            // Optional but strongly encouraged (≥ 40 chars).
   "author": { "name": "Alice" },   // Optional.
@@ -50,7 +50,8 @@ Notes:
 - `id` uses `publisher/name`. The publisher segment keeps names namespaced so
   two people can publish a driver called `serial-probe` without collision.
 - `tier` drives sandboxing and install policy in the Muxit server. Tier 1 JS
-  drivers run in a V8 sandbox; Tier 3 DLLs run with full .NET runtime access
+  drivers run in a V8 sandbox; Tier 2 Python drivers run as a subprocess
+  (Python 3.10+ on the host); Tier 3 DLLs run with full .NET runtime access
   and require explicit user approval at install time.
 - Unknown fields are ignored by the server, so new optional metadata can be
   added to a manifest without breaking older Muxit versions.
@@ -92,7 +93,7 @@ Pages, where the Muxit server fetches it to populate the marketplace.
 | `description`     | string   | Short description. |
 | `author`          | object   | `{ "name": "...", "github": "..." }`. |
 | `group`           | string   | `instruments`, `motion`, `communication`, or `utilities`. |
-| `tier`            | number   | `1` (JS) or `3` (DLL). |
+| `tier`            | number   | `1` (JS), `2` (Python), or `3` (DLL). |
 | `tags`            | string[] | Discovery tags. |
 | `license`         | string   | SPDX identifier (e.g., `MIT`). |
 | `repository`      | string   | Source code URL. |
@@ -112,7 +113,7 @@ CI runs `scripts/validate-entry.js` on every PR. It enforces:
 - Field types match the table above.
 - `id` uses `publisher/name` format and is unique (case-insensitive).
 - `group` is one of the allowed values.
-- `tier` is `1` or `3`.
+- `tier` is `1`, `2`, or `3`.
 - `downloadUrl` uses HTTPS.
 
 ### Example
