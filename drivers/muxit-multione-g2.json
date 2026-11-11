@@ -1,0 +1,24 @@
+{
+  "id": "muxit/multione-g2",
+  "name": "Signify MultiOne Workflow G2",
+  "version": "0.1.4",
+  "description": "Signify MultiOne Workflow G2 local REST service (localhost:2023): list interfaces and devices, write feature configurations (AOC, DALI, luminaire data) into Signify LED drivers.",
+  "author": {
+    "name": "Muxit",
+    "github": "muxit-io"
+  },
+  "group": "communication",
+  "tier": 1,
+  "tags": [
+    "io",
+    "networking"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/muxit-io/muxit-development",
+  "downloadUrl": "https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-multione-g2/v0.1.4/muxit-multione-g2-v0.1.4.muxdriver",
+  "downloadSize": 13636,
+  "sha256": "b9afab35e6d568c862a35800dd1a01c83075af302171ce87d327b5b59d007d22",
+  "minMuxitVersion": "0.3.0",
+  "published": "2026-11-11T14:04:44.715Z",
+  "changelog": "## 0.1.4\n\n- **`online` now updates by itself.** A heartbeat checks `GET /server/v1/status` every `heartbeatMs` (default 5000, 0 = off), skipped while another call runs, so a dashboard shows when Workflow G2 is stopped or started without any button press. New property `serviceMessage` says it in words. Heartbeat calls don't touch `lastResponse` or `lastError`.\n- The `multione` template hands the port over with the `dali` connector's `usbRelease` / `usbOpen` (LunatoneLuba 0.4.0 renamed `release` / `open`). **If you use the `multione` connector, update the LunatoneLuba driver to 0.4.0 too.** The \"MultiOne G2\" dashboard binds `dali.usbConnected`."
+}
