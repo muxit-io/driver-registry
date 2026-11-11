@@ -1,0 +1,22 @@
+{
+  "id": "muxit/fairino",
+  "name": "Fairino",
+  "version": "1.2.0",
+  "description": "Fairino collaborative robot driver (FR3/FR5/FR10/FR20 and similar) — communicates via the controller's native XML-RPC protocol on port 20003, with real-time state over CNDE (port 20005, firmware 4.x) or the legacy stream on port 20004. Background state monitor caches joints, TCP pose, motion status and safety alarms so property reads return instantly. Joint (MoveJ), straight-line (MoveL) and Cartesian point-to-point (MoveCart) motion that always runs with the robot's active tool and workpiece frame, waits or queues on request, plus forward/inverse kinematics, digital/analog I/O (read and write), force sensing, and the controller's fault codes translated to text. Streams JSON state snapshots at the configured poll rate.",
+  "author": {
+    "name": "muxit",
+    "github": "muxit-io"
+  },
+  "group": "motion",
+  "tier": 3,
+  "tags": [
+    "motion",
+    "robotics"
+  ],
+  "downloadUrl": "https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-fairino/v1.2.0/muxit-fairino-v1.2.0.muxdriver",
+  "downloadSize": 68269,
+  "sha256": "b8d543ff46c516a87f2ea06bf9cf8c205c772056d1e4b1b798e1a25c9b01a3e9",
+  "minMuxitVersion": "0.3.0",
+  "published": "2026-11-11T14:40:55.220Z",
+  "changelog": "## 1.2.0\n\n- **Real-time state over CNDE (port 20005).** Firmware 4.x — and the official SDK\n  since C#SDK-V1.3.2 — use CNDE: the driver subscribes to the fields it needs at\n  `statePeriodMs` (default 8 ms). New `config.stateStream`: `auto` (default) tries\n  CNDE first and falls back to the legacy 20004 packet, so 3.x controllers keep\n  working without changes; `cnde` / `legacy` force one. `stateProtocol` reports\n  which transport is in use.\n- **New CNDE-only properties** (null on the legacy stream): `speedScaleAuto`,\n  `speedScaleManual`, `collisionLevel`, `safetyDoorAlarm`, `safetyPlaneAlarm`,\n  `motionAlarm`, `interfereAlarm`, `singularPose`, `softLimitExceeded`,\n  `abnormalStop`, `programRunState`, `luaFileName`, `luaLineNumber`. Firmware that\n  doesn't know them gets the core field set only.\n- New config: `cndePort` (20005), `statePeriodMs`. `pollIntervalMs` was never used\n  and is dropped from the template."
+}
