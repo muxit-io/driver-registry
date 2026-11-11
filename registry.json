@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-11T14:05:43.344Z",
+  "updated": "2026-11-11T14:06:03.023Z",
   "drivers": [
     {
       "id": "muxit/audiosynth",
@@ -28,7 +28,7 @@
     {
       "id": "muxit/lunatone-luba",
       "name": "Lunatone DALI-2 USB (LUBA)",
-      "version": "0.3.1",
+      "version": "0.4.0",
       "description": "DALI-2 bus master via a Lunatone DALI-2 USB interface (LUBA protocol): levels, status, settings read/write, D4i memory banks, addressing.",
       "author": {
         "name": "Muxit",
@@ -42,12 +42,12 @@
       ],
       "license": "MIT",
       "repository": "https://github.com/muxit-io/muxit-development",
-      "downloadUrl": "https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-lunatone-luba/v0.3.1/muxit-lunatone-luba-v0.3.1.muxdriver",
-      "downloadSize": 20185,
-      "sha256": "6c1dd4736c42279fc26e52f41d943715c0d75d6dbcc84f4974443bfcbd4caa00",
+      "downloadUrl": "https://github.com/muxit-io/muxit-drivers/releases/download/driver/muxit-lunatone-luba/v0.4.0/muxit-lunatone-luba-v0.4.0.muxdriver",
+      "downloadSize": 22895,
+      "sha256": "0ac080bd7129ca412f0d0e070d51c5a6209216b763a2ac0031bd5fd00f506b7c",
       "minMuxitVersion": "0.3.0",
-      "published": "2026-11-09T15:57:35.031Z",
-      "changelog": "## 0.3.1\n\n- First version in the Muxit driver repo, with a `template.js` connector (`dali`) that the bundled \"DALI status\" dashboard and `dali-monitor` script bind to.\n- The serial port is no longer opened with an empty line delimiter, and `release` leaves raw mode only after closing the port. Muxit's line splitter loops forever on an empty delimiter, so data arriving outside raw mode could hang the serial receive thread.\n- When the interface does not answer the LUBA settings command at `open`, the port is closed again instead of staying open with `connected: true`."
+      "published": "2026-11-11T14:02:18.432Z",
+      "changelog": "## 0.4.0\n\n- **Every property and action is renamed, and names now start with the layer they talk to:** `usb…` for the Lunatone interface, `bus…` for the whole DALI line, `unit…` for one DALI address. **If you have scripts or dashboards for 0.3.x, rename the calls:** `open`/`release` → `usbOpen`/`usbRelease`, `interfaceInfo` → `usbInfo`, `busStatus` → `busRefresh` / `busScan`, `scan` → `busScan`, `assignAddresses` → `busAssignAddresses`, `sendRaw16` → `busSendRaw`, `setLevel` → `unitSetLevel`, `queryActualLevel` → `unitLevel`, `readStatus` → `unitStatus`, `readSettings` → `unitSettings`, `storeSettings` → `unitConfigure`, `setShortAddress` → `unitSetAddress`, `setDimmingCurve` → `unitSetCurve`, `identify` → `unitIdentify`, `reset` → `unitReset`, `readD4i` → `unitD4i`, `readMemoryBank` → `unitMemoryBank`, `query` → `unitQuery`; properties `connected` → `usbConnected`, `port` → `usbPort`.\n- Removed as redundant: `off`, `recallMax`, `recallMin` (use `unitSetLevel`, 0 = off), `queryStatus` (part of `unitStatus`), `queryDimmingCurve` (part of `unitSettings`), `lineStatus` (the heartbeat keeps `busPowered` live), `writeMode` and `interfaceSettings` (now `usbInfo().settings`).\n- **The USB link is watched: an unplugged interface now shows as disconnected.** Previously `connected` stayed `true` until `release`, because the serial port still reads as open after the device disappears. A heartbeat (READ STATUS every `heartbeatMs`, default 2000) checks that the interface answers. A failed write or two consecutive LUBA timeouts mark the link as lost. New: `usbState` (`ok`, `notFound`, `portBusy`, `noResponse`, `released`, `notConfigured`, `closed`, `error`), `usbMessage` and a live `busPowered`.\n- Auto-reconnect: while the link is down the driver reopens the port every `reconnectMs` (default 3000), so plugging the interface back in recovers on its own. `usbRelease` stops this until `usbOpen`, so the MultiOne hand-over is not affected. A missing or busy interface at startup no longer stops the connector from loading.\n- The dashboard values moved from the template into the driver: `status` (`OK`, `FAIL`, `NO UNITS`, `NO DATA`, `NO BUS`, `NO USB`, `PORT BUSY`, `NO RESPONSE`, `RELEASED`, `NO PORT`, `OFFLINE`), `statusText` (now with the failures), `lastUpdate`, `units` (now the unit list, `level` instead of `actualLevel`), `unitCount`, `unitLevels` and the writable broadcast level `busLevel`. The `dali` template is now only config and AI instructions; its short-name methods are gone because driver actions take positional arguments directly.\n- `unitConfigure(3, {maxLevel: 200})` works from a script. The old `storeSettings(3, {…})` silently wrote nothing, because the trailing object was merged as options.\n- \"DALI status\" dashboard rebound to the new names, with the new states. One status box replaces the Summary / Failures pair."
     },
     {
       "id": "muxit/midi",
