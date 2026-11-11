@@ -16,7 +16,7 @@ const DRIVERS_DIR = path.resolve(__dirname, '..', 'drivers');
 
 const REQUIRED_FIELDS = ['id', 'name', 'version', 'downloadUrl'];
 const VALID_GROUPS = ['instruments', 'motion', 'communication', 'utilities'];
-const VALID_TIERS = [1, 3];
+const VALID_TIERS = [1, 2, 3];
 
 const FIELD_TYPES = {
   id: 'string',
@@ -89,7 +89,7 @@ function validateEntry(file, entry) {
 
   // Tier constraint
   if (entry.tier !== undefined && !VALID_TIERS.includes(entry.tier)) {
-    errors.push(`"tier" must be 1 (JS) or 3 (DLL) (got ${entry.tier})`);
+    errors.push(`"tier" must be 1 (JS), 2 (Python), or 3 (DLL) (got ${entry.tier})`);
   }
 
   // ID format: should be publisher/name

@@ -109,7 +109,7 @@ CI runs `scripts/validate-entry.js` on every PR. It checks:
 - `id` uses `publisher/name` format
 - `id` is unique across all entries (case-insensitive)
 - `group` is one of the allowed values
-- `tier` is `1` or `3`
+- `tier` is `1`, `2`, or `3`
 - `downloadUrl` uses HTTPS
 
 ## Security

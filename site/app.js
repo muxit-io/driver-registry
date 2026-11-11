@@ -2,7 +2,7 @@
    Fetches ./registry.json, renders a filterable list. Each card links to
    ./drivers/<slug>/, which is a static page generated at build time. */
 
-const TIER_LABELS = { 1: 'JS', 3: 'DLL' };
+const TIER_LABELS = { 1: 'JS', 2: 'Python', 3: 'DLL' };
 
 const GROUPS = [
   { id: 'all',           label: 'All' },
